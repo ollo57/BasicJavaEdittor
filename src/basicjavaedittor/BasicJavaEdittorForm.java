@@ -282,3 +282,5 @@ public class BasicJavaEdittorForm extends javax.swing.JFrame implements ActionLi
     throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
   }
 }
+
+//if we commit it'd be cool to add new lines under this since it shows in the "blame" section when the edit was made
