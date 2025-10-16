@@ -22,6 +22,7 @@ import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditListener;
 
 import javax.swing.undo.UndoManager;
 
@@ -29,7 +30,7 @@ import javax.swing.undo.UndoManager;
  *
  * @author Juan-pinto
  */
-public class BasicJavaEdittorForm extends javax.swing.JFrame implements ActionListener {
+public class BasicJavaEdittorForm extends javax.swing.JFrame implements ActionListener, UndoableEditListener, DocumentListener {
 
   UndoManager undoManager = new UndoManager();
   private JFileChooser chooser = new JFileChooser();
@@ -40,7 +41,7 @@ public class BasicJavaEdittorForm extends javax.swing.JFrame implements ActionLi
    */
   public BasicJavaEdittorForm() {
     initComponents();
-
+    jTextPane1.getDocument().addUndoableEditListener(this);
     btnSave.addActionListener(this);
   }
 
@@ -170,7 +171,7 @@ public class BasicJavaEdittorForm extends javax.swing.JFrame implements ActionLi
   }//GEN-LAST:event_saveFileAction
 
   private void RedoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedoActionPerformed
-
+    redo();
   }//GEN-LAST:event_RedoActionPerformed
 
   private void UndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoActionPerformed
@@ -253,5 +254,30 @@ public class BasicJavaEdittorForm extends javax.swing.JFrame implements ActionLi
         JOptionPane.showMessageDialog(this, "An error occurred.  Can't Undo.\n" + e.getLocalizedMessage());
       }
     }
+  }
+
+  private void redo() {
+    if (undoManager.canRedo()) {
+      try {
+        undoManager.redo();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "An error occurred. Can't Redo.\n" + e.getLocalizedMessage());
+      }
+    }
+  }
+
+  @Override
+  public void insertUpdate(DocumentEvent e) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public void removeUpdate(DocumentEvent e) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  }
+
+  @Override
+  public void changedUpdate(DocumentEvent e) {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
   }
 }
