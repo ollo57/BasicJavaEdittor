@@ -31,7 +31,7 @@ import javax.swing.undo.UndoManager;
  * @author Juan-pinto
  */
 public class BasicJavaEdittorForm extends javax.swing.JFrame implements ActionListener, UndoableEditListener, DocumentListener {
-
+    
     UndoManager undoManager = new UndoManager();
     private JFileChooser chooser = new JFileChooser();
     File curFile;
@@ -41,6 +41,8 @@ public class BasicJavaEdittorForm extends javax.swing.JFrame implements ActionLi
      */
     public BasicJavaEdittorForm() {
         initComponents();
+    JavaSyntaxDocument doc = new JavaSyntaxDocument();
+    jTextPane1.setDocument(doc); 
         jTextPane1.getDocument().addUndoableEditListener(this);
         btnSave.addActionListener(this);
     }
